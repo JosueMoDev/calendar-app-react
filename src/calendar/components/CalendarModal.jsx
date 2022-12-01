@@ -40,8 +40,6 @@ export const CalendarModal = () => {
         end: addHours( new Date(), 2 )
     });
 
-  console.log(formValues)
-    
     const titleClass = useMemo(
         () => {
             if (!formSubmitted) return '';
@@ -82,7 +80,6 @@ export const CalendarModal = () => {
             return
         }
         if( formValues.title.length<=0) return
-        console.log(formValues);
         await startSavingEvent(formValues);
         closeDateModal();
         SetFormSubmitted(false);

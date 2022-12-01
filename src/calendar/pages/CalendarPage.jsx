@@ -1,7 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Calendar } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import { addHours } from 'date-fns'
 
 import { NavBar, CalendarEvent, CalendarModal, FlyingActionButton, FlyingDeleteButton } from '../'
 import { localizer } from '../../helpers'
@@ -10,7 +9,7 @@ import { useUiStore, useCalendarStore } from '../../hooks'
 
 export const CalendarPage = () => {
   const { openDateModal } = useUiStore();
-  const { events, setActiveEvent } = useCalendarStore();
+  const { events, setActiveEvent, startLoadingEvents, isLoadingEvents} = useCalendarStore();
   const [lastWiew, setLastWiew] = useState(localStorage.getItem('lastView') || 'week');
   const eventStyleGetter = ( event, start, end, isSelected ) => { 
     const style = {
@@ -29,6 +28,11 @@ export const CalendarPage = () => {
     localStorage.setItem('lastView', event);
     setLastWiew(event);
   }
+
+  useEffect(() => {
+    startLoadingEvents();
+  }, [])
+  
   return (
     <>
       <NavBar />

@@ -2,9 +2,8 @@
 import { useCalendarStore } from '../../hooks'
 
 export const FlyingDeleteButton = () => {
-    const { startDeletingEvent, hasEventSelected } = useCalendarStore();
+    const { startDeletingEvent, hasEventSelected, activeEvent } = useCalendarStore();
     const handleDeleteEvent = () => {
-        
         startDeletingEvent();
     }
     return (
